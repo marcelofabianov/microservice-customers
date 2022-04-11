@@ -22,6 +22,8 @@ class ContactsController extends Controller
         $type = $request->has('type') ? ContactTypeEnum::from((int) $request->get('type')) : null;
         $contacts = $repository->contacts($idAccount, $type);
 
-        return response()->json($contacts->simplePaginate());
+        $perPage = $request->get('per_page', env('SIMPLE_PAGINATE_PER_PAGE'));
+
+        return response()->json($contacts->simplePaginate($perPage));
     }
 }
