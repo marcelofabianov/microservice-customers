@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12524947d8c752f84bc21aaaede06bfa",
+    "content-hash": "818b810021169ca3b53b8b415546880e",
     "packages": [
         {
             "name": "brick/math",
@@ -140,6 +140,189 @@
                 "source": "https://github.com/dflydev/dflydev-dot-access-data/tree/v3.0.1"
             },
             "time": "2021-08-13T13:06:58+00:00"
+        },
+        {
+            "name": "dgame/php-cast",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dgame/php-cast.git",
+                "reference": "c3cf7f61525263097f820b5ad21f92812c6df486"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dgame/php-cast/zipball/c3cf7f61525263097f820b5ad21f92812c6df486",
+                "reference": "c3cf7f61525263097f820b5ad21f92812c6df486",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.4",
+                "ergebnis/phpstan-rules": "^0.15",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^9.4",
+                "roave/security-advisories": "dev-latest",
+                "slevomat/coding-standard": "dev-master",
+                "spaceemotion/php-coding-standard": "dev-master",
+                "spaze/phpstan-disallowed-calls": "^1.5",
+                "symplify/easy-coding-standard": "^9.3",
+                "thecodingmachine/phpstan-safe-rule": "^1.0",
+                "thecodingmachine/phpstan-strict-rules": "^0.12"
+            },
+            "type": "package",
+            "autoload": {
+                "files": [
+                    "src/Assume/functions.php",
+                    "src/Assert/functions.php",
+                    "src/Collection/functions.php"
+                ],
+                "psr-4": {
+                    "Dgame\\Cast\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randy Schütt",
+                    "email": "rswhite4@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/Dgame/php-cast/issues",
+                "source": "https://github.com/Dgame/php-cast/tree/v0.1.0"
+            },
+            "time": "2021-09-11T15:50:05+00:00"
+        },
+        {
+            "name": "dgame/php-dto",
+            "version": "v0.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dgame/php-dto.git",
+                "reference": "871e97086d76b5bbc48678c8c12fef4e006deb2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dgame/php-dto/zipball/871e97086d76b5bbc48678c8c12fef4e006deb2f",
+                "reference": "871e97086d76b5bbc48678c8c12fef4e006deb2f",
+                "shasum": ""
+            },
+            "require": {
+                "dgame/php-cast": "^0.1.0",
+                "dgame/php-type": "^1.0",
+                "php": "^8.0",
+                "thecodingmachine/safe": "^1.3"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.4",
+                "ergebnis/phpstan-rules": "^0.15",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-deprecation-rules": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^9.4",
+                "roave/security-advisories": "dev-latest",
+                "slevomat/coding-standard": "dev-master",
+                "spaceemotion/php-coding-standard": "dev-master",
+                "spaze/phpstan-disallowed-calls": "^1.5",
+                "symplify/easy-coding-standard": "^9.3",
+                "thecodingmachine/phpstan-safe-rule": "^1.0",
+                "thecodingmachine/phpstan-strict-rules": "^0.12"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Dgame\\DataTransferObject\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randy Schütt",
+                    "email": "rswhite4@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "A data transfer object inspired by Rust's serde",
+            "keywords": [
+                "Data Transfer Object",
+                "dto"
+            ],
+            "support": {
+                "issues": "https://github.com/Dgame/php-dto/issues",
+                "source": "https://github.com/Dgame/php-dto/tree/v0.4.0"
+            },
+            "time": "2021-09-12T19:19:36+00:00"
+        },
+        {
+            "name": "dgame/php-type",
+            "version": "v1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Dgame/php-type.git",
+                "reference": "d2ed5f15ae4250ad3c70a71aa2d19370d4788e61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Dgame/php-type/zipball/d2ed5f15ae4250ad3c70a71aa2d19370d4788e61",
+                "reference": "d2ed5f15ae4250ad3c70a71aa2d19370d4788e61",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0",
+                "thecodingmachine/safe": "^1.3"
+            },
+            "require-dev": {
+                "ergebnis/composer-normalize": "^2.4",
+                "ergebnis/phpstan-rules": "^1",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/phpstan": "^1",
+                "phpstan/phpstan-deprecation-rules": "^1",
+                "phpstan/phpstan-strict-rules": "^1",
+                "phpunit/phpunit": "^9.5",
+                "roave/security-advisories": "dev-latest",
+                "slevomat/coding-standard": "dev-master",
+                "spaceemotion/php-coding-standard": "dev-master",
+                "spaze/phpstan-disallowed-calls": "^2",
+                "symplify/easy-coding-standard": "^9.3",
+                "thecodingmachine/phpstan-safe-rule": "^1.0",
+                "thecodingmachine/phpstan-strict-rules": "^1"
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "Dgame\\Type\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Randy Schütt",
+                    "email": "rswhite4@gmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "php type",
+            "support": {
+                "issues": "https://github.com/Dgame/php-type/issues",
+                "source": "https://github.com/Dgame/php-type/tree/v1.3.3"
+            },
+            "time": "2021-11-30T21:55:17+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -1454,16 +1637,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "3.0.15",
+            "version": "3.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "3b71cd136dc0331ee87b636b25f4ee339368c718"
+                "reference": "dea729954c596bdb6cdaecba6f73df9f3e2c4255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3b71cd136dc0331ee87b636b25f4ee339368c718",
-                "reference": "3b71cd136dc0331ee87b636b25f4ee339368c718",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/dea729954c596bdb6cdaecba6f73df9f3e2c4255",
+                "reference": "dea729954c596bdb6cdaecba6f73df9f3e2c4255",
                 "shasum": ""
             },
             "require": {
@@ -1524,7 +1707,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/flysystem/issues",
-                "source": "https://github.com/thephpleague/flysystem/tree/3.0.15"
+                "source": "https://github.com/thephpleague/flysystem/tree/3.0.16"
             },
             "funding": [
                 {
@@ -1540,20 +1723,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-04-08T18:36:06+00:00"
+            "time": "2022-04-11T13:32:22+00:00"
         },
         {
             "name": "league/mime-type-detection",
-            "version": "1.9.0",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/mime-type-detection.git",
-                "reference": "aa70e813a6ad3d1558fc927863d47309b4c23e69"
+                "reference": "3e4a35d756eedc67096f30240a68a3149120dae7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/aa70e813a6ad3d1558fc927863d47309b4c23e69",
-                "reference": "aa70e813a6ad3d1558fc927863d47309b4c23e69",
+                "url": "https://api.github.com/repos/thephpleague/mime-type-detection/zipball/3e4a35d756eedc67096f30240a68a3149120dae7",
+                "reference": "3e4a35d756eedc67096f30240a68a3149120dae7",
                 "shasum": ""
             },
             "require": {
@@ -1584,7 +1767,7 @@
             "description": "Mime-type detection for Flysystem",
             "support": {
                 "issues": "https://github.com/thephpleague/mime-type-detection/issues",
-                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.9.0"
+                "source": "https://github.com/thephpleague/mime-type-detection/tree/1.10.0"
             },
             "funding": [
                 {
@@ -1596,7 +1779,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-21T11:48:40+00:00"
+            "time": "2022-04-11T12:49:04+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4816,6 +4999,145 @@
             "time": "2022-03-02T12:58:14+00:00"
         },
         {
+            "name": "thecodingmachine/safe",
+            "version": "v1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thecodingmachine/safe.git",
+                "reference": "a8ab0876305a4cdaef31b2350fcb9811b5608dbc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thecodingmachine/safe/zipball/a8ab0876305a4cdaef31b2350fcb9811b5608dbc",
+                "reference": "a8ab0876305a4cdaef31b2350fcb9811b5608dbc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "squizlabs/php_codesniffer": "^3.2",
+                "thecodingmachine/phpstan-strict-rules": "^0.12"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.1-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "deprecated/apc.php",
+                    "deprecated/libevent.php",
+                    "deprecated/mssql.php",
+                    "deprecated/stats.php",
+                    "lib/special_cases.php",
+                    "generated/apache.php",
+                    "generated/apcu.php",
+                    "generated/array.php",
+                    "generated/bzip2.php",
+                    "generated/calendar.php",
+                    "generated/classobj.php",
+                    "generated/com.php",
+                    "generated/cubrid.php",
+                    "generated/curl.php",
+                    "generated/datetime.php",
+                    "generated/dir.php",
+                    "generated/eio.php",
+                    "generated/errorfunc.php",
+                    "generated/exec.php",
+                    "generated/fileinfo.php",
+                    "generated/filesystem.php",
+                    "generated/filter.php",
+                    "generated/fpm.php",
+                    "generated/ftp.php",
+                    "generated/funchand.php",
+                    "generated/gmp.php",
+                    "generated/gnupg.php",
+                    "generated/hash.php",
+                    "generated/ibase.php",
+                    "generated/ibmDb2.php",
+                    "generated/iconv.php",
+                    "generated/image.php",
+                    "generated/imap.php",
+                    "generated/info.php",
+                    "generated/ingres-ii.php",
+                    "generated/inotify.php",
+                    "generated/json.php",
+                    "generated/ldap.php",
+                    "generated/libxml.php",
+                    "generated/lzf.php",
+                    "generated/mailparse.php",
+                    "generated/mbstring.php",
+                    "generated/misc.php",
+                    "generated/msql.php",
+                    "generated/mysql.php",
+                    "generated/mysqli.php",
+                    "generated/mysqlndMs.php",
+                    "generated/mysqlndQc.php",
+                    "generated/network.php",
+                    "generated/oci8.php",
+                    "generated/opcache.php",
+                    "generated/openssl.php",
+                    "generated/outcontrol.php",
+                    "generated/password.php",
+                    "generated/pcntl.php",
+                    "generated/pcre.php",
+                    "generated/pdf.php",
+                    "generated/pgsql.php",
+                    "generated/posix.php",
+                    "generated/ps.php",
+                    "generated/pspell.php",
+                    "generated/readline.php",
+                    "generated/rpminfo.php",
+                    "generated/rrd.php",
+                    "generated/sem.php",
+                    "generated/session.php",
+                    "generated/shmop.php",
+                    "generated/simplexml.php",
+                    "generated/sockets.php",
+                    "generated/sodium.php",
+                    "generated/solr.php",
+                    "generated/spl.php",
+                    "generated/sqlsrv.php",
+                    "generated/ssdeep.php",
+                    "generated/ssh2.php",
+                    "generated/stream.php",
+                    "generated/strings.php",
+                    "generated/swoole.php",
+                    "generated/uodbc.php",
+                    "generated/uopz.php",
+                    "generated/url.php",
+                    "generated/var.php",
+                    "generated/xdiff.php",
+                    "generated/xml.php",
+                    "generated/xmlrpc.php",
+                    "generated/yaml.php",
+                    "generated/yaz.php",
+                    "generated/zip.php",
+                    "generated/zlib.php"
+                ],
+                "psr-4": {
+                    "Safe\\": [
+                        "lib/",
+                        "deprecated/",
+                        "generated/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHP core functions that throw exceptions instead of returning FALSE on error",
+            "support": {
+                "issues": "https://github.com/thecodingmachine/safe/issues",
+                "source": "https://github.com/thecodingmachine/safe/tree/v1.3.3"
+            },
+            "time": "2020-10-28T17:51:34+00:00"
+        },
+        {
             "name": "tijsverkoyen/css-to-inline-styles",
             "version": "2.2.4",
             "source": {
@@ -7741,5 +8063,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
