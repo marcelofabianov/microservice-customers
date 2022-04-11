@@ -4,6 +4,8 @@ namespace Modules\Contacts\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Modules\Accounts\Data\Models\Account;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
 use Modules\Contacts\Data\Factories\ContactFactory;
 use Modules\Contacts\Data\Scopes\ContactTypeScope;
@@ -27,5 +29,10 @@ class Contact extends Model
     protected static function newFactory(): ContactFactory
     {
         return new ContactFactory;
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class);
     }
 }

@@ -3,10 +3,12 @@
 namespace Modules\Accounts\Data\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Accounts\Data\Enums\AccountStatusEnum;
 use Modules\Accounts\Data\Factories\AccountFactory;
 use Modules\Accounts\Data\Scopes\AccountStatusScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Contacts\Data\Models\Contact;
 
 class Account extends Model
 {
@@ -30,5 +32,10 @@ class Account extends Model
     protected static function newFactory(): AccountFactory
     {
         return new AccountFactory;
+    }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
     }
 }
