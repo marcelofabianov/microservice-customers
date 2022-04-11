@@ -33,11 +33,11 @@ class RouteServiceProvider extends ServiceProvider
                 return '';
             });
 
-            Route::prefix('api/account-manager/v1/accounts')
-                ->as('api.accounts.')
+            Route::prefix('api/account-manager/v1')
+                ->as('api.')
                 ->middleware('api')
-                ->namespace('Modules\Accounts\Http\Controllers')
-                ->group(base_path('modules/Accounts/routes.php'));
+                ->namespace('Modules')
+                ->group(base_path('routes/modules.php'));
         });
     }
 

@@ -8,6 +8,6 @@ class DefaultStatusAccount
 {
     public static function get(): AccountStatusEnum
     {
-        return AccountStatusEnum::TRIAL_PROGRESS;
+        return AccountStatusEnum::trial;
     }
 }
