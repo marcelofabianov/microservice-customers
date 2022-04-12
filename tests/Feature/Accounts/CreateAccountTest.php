@@ -74,7 +74,7 @@ class CreateAccountTest extends TestCase
             'district' => $data['district'], // expected
             'city' => $data['city'], // expected
             'complement' => $data['complement'], // expected
-            'status' => $actual['status'], // actual
+            'status' => $data['status'], // expected
             'createdAt' => $actual['createdAt'], // actual
             'updatedAt' => $actual['updatedAt'], // actual
         ];
