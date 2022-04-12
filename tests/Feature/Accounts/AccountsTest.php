@@ -61,9 +61,12 @@ class AccountsTest extends TestCase
         $this->assertEquals($expected, $actual->json());
     }
 
+    /**
+     * @test
+     */
     public function list_of_accounts_that_contain_status_parameter()
     {
-        $account =  Account::factory()->create();
+        $account =  Account::factory()->create(['status' => 2]);
 
         $actual = $this->get(env('API_URL').'/accounts?status=2', $this->getHeadersAuthorization());
 
