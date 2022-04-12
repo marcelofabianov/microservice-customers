@@ -51,7 +51,7 @@ return [
         'pgsql_testing' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST','microservice_db_testing'),
+            'host' => env('DB_HOST','microservice_account_db_testing'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'microservice_db_testing'),
             'username' => env('DB_USERNAME', 'sail'),
