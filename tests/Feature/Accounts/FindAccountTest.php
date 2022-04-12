@@ -44,5 +44,37 @@ class FindAccountTest extends TestCase
         $this->assertEquals($expected, $actual->json());
     }
 
+    /**
+     * @test
+     */
+    public function find_account_passing_contact_relationship_parameter()
+    {
+        $account = Account::factory()->create();
 
+        $actual = $this->get(env('API_URL').'/accounts/'.$account->id.'?relationships[]=contacts', $this->getHeadersAuthorization());
+
+        $expected = [
+            'id' => $account->id,
+            'document' => $account->document,
+            'name' => $account->name,
+            'address' => $account->address,
+            'district' => $account->district,
+            'city' => $account->city,
+            'complement' => $account->complement,
+            'status' => $account->status->value,
+            'createdAt' => Carbon::parse($account->created_at)->toIso8601String(),
+            'updatedAt' => Carbon::parse($account->updated_at)->toIso8601String(),
+            'relationships' => [
+                'contacts' => [
+                    'links' => [
+                        'related' => route('api.accounts.contacts', $account->id)
+                    ]
+                ]
+            ]
+        ];
+
+        $actual->assertOk();
+
+        $this->assertEquals($expected, $actual->json());
+    }
 }
