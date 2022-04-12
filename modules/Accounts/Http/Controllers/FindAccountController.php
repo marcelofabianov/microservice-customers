@@ -3,17 +3,17 @@
 namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Modules\Accounts\Data\Models\Account;
+use Modules\Accounts\Http\Resources\AccountResource;
 
 class FindAccountController extends Controller
 {
     /**
      * @param int $id
-     * @return JsonResponse
+     * @return AccountResource
      */
-    public function handle(int $id): JsonResponse
+    public function handle(int $id): AccountResource
     {
-        return response()->json(Account::findOrFail($id));
+        return new AccountResource(Account::findOrFail($id));
     }
 }
