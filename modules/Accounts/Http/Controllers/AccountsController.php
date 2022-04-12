@@ -3,23 +3,23 @@
 namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Accounts\Data\Repositories\AccountRepository;
+use Modules\Accounts\Http\Resources\AccountCollection;
 
 class AccountsController extends Controller
 {
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return AccountCollection
      */
-    public function handle(Request $request): JsonResponse
+    public function handle(Request $request): AccountCollection
     {
         $repository = new AccountRepository();
         $accounts = $repository->accounts($request->get('status'));
 
         $perPage = $request->get('per_page', env('SIMPLE_PAGINATE_PER_PAGE'));
 
-        return response()->json($accounts->simplePaginate($perPage));
+        return new AccountCollection($accounts->simplePaginate($perPage));
     }
 }

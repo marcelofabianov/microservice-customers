@@ -47,10 +47,10 @@ services:
     container_name: microservice_account_db_testing
     image: postgres:13
     environment:
-      PGPASSWORD: '${DB_PASSWORD:-password}'
-      POSTGRES_DB: '${DB_DATABASE}'
-      POSTGRES_USER: '${DB_USERNAME}'
-      POSTGRES_PASSWORD: '${DB_PASSWORD:-password}'
+      PGPASSWORD: '${TEST_DB_PASSWORD:-password}'
+      POSTGRES_DB: '${TEST_DB_DATABASE}'
+      POSTGRES_USER: '${TEST_DB_USERNAME}'
+      POSTGRES_PASSWORD: '${TEST_DB_PASSWORD:-password}'
     volumes:
       - 'microservice_account_db_testing:/var/lib/postgresql/data'
     ports:
