@@ -48,6 +48,20 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
+        'pgsql_testing' => [
+            'driver' => 'pgsql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST','microservice_db_testing'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'microservice_db_testing'),
+            'username' => env('DB_USERNAME', 'sail'),
+            'password' => env('DB_PASSWORD', 'password'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
     ],
 
     /*
