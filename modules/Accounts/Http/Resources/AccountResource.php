@@ -9,7 +9,25 @@ class AccountResource extends JsonResource
 {
     public function toArray($request): array
     {
-        $json = [
+        $json = $this->data();
+
+        if ($request->has('relationships')) {
+            $json['relationships'] = $this->relationships($request->get('relationships'));
+        }
+
+        if ($request->get('links') == true) {
+            $json['links'] = $this->links($this->id);
+        }
+
+        return $json;
+    }
+
+    /**
+     * @return array
+     */
+    private function data(): array
+    {
+        return [
             'id' => $this->id,
             'document' => $this->document,
             'name' => $this->name,
@@ -21,24 +39,31 @@ class AccountResource extends JsonResource
             'createdAt' => (Carbon::parse($this->created_at))->toIso8601String(),
             'updatedAt' => (Carbon::parse($this->updated_at))->toIso8601String(),
         ];
+    }
 
-        if ($request->has('relationships')) {
-            $json['relationships'] = [];
-            if (in_array('contacts', $request->get('relationships'))) {
-                $json['relationships'] = [
-                    'contacts' => [
-                        'links' => [
-                            'related' => route('api.accounts.contacts', $this->id),
-                        ]
-                    ],
-                ];
-            }
+    /**
+     * @param $id
+     * @return array
+     */
+    private function links($id): array
+    {
+        return ['self' => route('api.accounts.find', $id)];
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function relationships($request): array
+    {
+        $json = [];
+        if (in_array('contacts', $request)) {
+            $json['contacts'] = [
+                'links' => [
+                    'related' => route('api.accounts.contacts', $this->id),
+                ]
+            ];
         }
-
-        if ($request->get('links') == true) {
-            $json['links'] = ['self' => route('api.accounts.find', $this->id)];
-        }
-
         return $json;
     }
 }

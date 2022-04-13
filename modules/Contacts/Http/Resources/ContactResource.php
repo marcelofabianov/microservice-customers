@@ -7,17 +7,13 @@ use Carbon\Carbon;
 
 class ContactResource extends JsonResource
 {
+    /**
+     * @param $request
+     * @return array
+     */
     public function toArray($request): array
     {
-        $json = [
-            'id' => $this->id,
-            'account_id' => $this->account_id,
-            'description' => $this->description,
-            'contact' => $this->contact,
-            'type' => $this->type,
-            'createdAt' => (Carbon::parse($this->created_at))->toIso8601String(),
-            'updatedAt' => (Carbon::parse($this->updated_at))->toIso8601String(),
-        ];
+        $json = $this->data();
 
         if ($request->has('relationships')) {
             $json['relationships'] = $this->relationships($request->get('relationships'));
@@ -28,6 +24,22 @@ class ContactResource extends JsonResource
         }
 
         return $json;
+    }
+
+    /**
+     * @return array
+     */
+    private function data(): array
+    {
+        return [
+            'id' => $this->id,
+            'account_id' => $this->account_id,
+            'description' => $this->description,
+            'contact' => $this->contact,
+            'type' => $this->type,
+            'createdAt' => (Carbon::parse($this->created_at))->toIso8601String(),
+            'updatedAt' => (Carbon::parse($this->updated_at))->toIso8601String(),
+        ];
     }
 
     /**
