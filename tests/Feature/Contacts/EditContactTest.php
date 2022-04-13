@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Modules\Accounts\Data\Models\Account;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
 use Modules\Contacts\Data\Models\Contact;
 use Tests\Feature\OAuth;
