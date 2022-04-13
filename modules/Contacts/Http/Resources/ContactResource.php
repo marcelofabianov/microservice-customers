@@ -20,22 +20,39 @@ class ContactResource extends JsonResource
         ];
 
         if ($request->has('relationships')) {
-            $json['relationships'] = [];
-            if (in_array('account', $request->get('relationships'))) {
-                $json['relationships'] = [
-                    'account' => [
-                        'links' => [
-                            'related' => route('api.accounts.find', $this->account_id),
-                        ]
-                    ],
-                ];
-            }
+            $json['relationships'] = $this->relationships($request->get('relationships'));
         }
 
         if ($request->get('links') == true) {
-            $json['links'] = ['self' => route('api.contacts.find', $this->id)];
+            $json['links'] = $this->links($this->id);
         }
 
+        return $json;
+    }
+
+    /**
+     * @param $id
+     * @return array
+     */
+    private function links($id): array
+    {
+        return ['self' => route('api.contacts.find', $id)];
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function relationships($request): array
+    {
+        $json = [];
+        if (in_array('account', $request)) {
+            $json['account'] = [
+                'links' => [
+                    'related' => route('api.accounts.find', $this->account_id),
+                ]
+            ];
+        }
         return $json;
     }
 }
