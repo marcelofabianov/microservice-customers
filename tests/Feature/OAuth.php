@@ -2,50 +2,41 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Testing\TestResponse;
-use JetBrains\PhpStorm\ArrayShape;
+use Laravel\Passport\ClientRepository;
 
 trait OAuth
 {
-    /**
-     * @param int|null $id
-     * @param string|null $secret
-     * @return TestResponse
-     */
-    public function oauth(int $id = null, string $secret = null): TestResponse
+    public function setHeadersAutorization()
     {
         Artisan::call('passport:install');
 
-        $client = DB::table('oauth_clients')
-            ->select('id', 'secret')
-            ->first();
+        $data = $this->dataSubmit();
 
-        $data = [
-            'grant_type' => 'client_credentials',
-            'client_id' => $id ?? $client->id,
-            'client_secret' => $secret ?? $client->secret,
-        ];
+        $response = $this->postJson('/oauth/token', $data, ['Accept' => 'application/json']);
 
-        $headers = [
+        $jsonResponse = $response->json();
+
+        $this->headersAuthorization = [
             'Accept' => 'application/json',
-            'Content-Type' => 'application/json'
+            'Authorization' => 'Bearer '.$jsonResponse['access_token']
         ];
-
-        return $this->postJson('/oauth/token', $data, $headers);
     }
 
-    #[ArrayShape(['Accept' => "string", 'Content-Type' => "string", 'Authorization' => "string"])]
-    public function getHeadersAuthorization(): array
+    private function dataSubmit(): array
     {
-        $response = $this->oauth();
-        $json = $response->json();
+        $user = User::factory()->create();
+
+        $client = new ClientRepository();
+        $client = $client->createPersonalAccessClient($user->id, $user->name, '');
 
         return [
-            'Accept' => 'application/json',
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer '.$json['access_token']
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $user->email,
+            'password' => $user->password
         ];
     }
 }
