@@ -8,6 +8,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 use Illuminate\Support\Facades\Event;
 use Modules\Accounts\Data\Models\Account;
 use Modules\Accounts\Data\Observers\AccountObserver;
+use Modules\Contacts\Data\Models\Contact;
+use Modules\Contacts\Data\Observers\ContactObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Account::observe(AccountObserver::class);
+        Contact::observe(ContactObserver::class);
     }
 
     /**

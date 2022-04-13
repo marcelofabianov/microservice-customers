@@ -1,32 +1,32 @@
 <?php
 
-namespace Modules\Accounts\Data\Observers;
+namespace Modules\Contacts\Data\Observers;
 
-use Modules\Accounts\Data\Models\Account;
+use Modules\Contacts\Data\Models\Contact;
 
-class AccountObserver
+class ContactObserver
 {
     /**
      * @var string
      */
-    private string $type = 'Accounts';
+    private string $type = 'Contacts';
 
     /**
      * Handle the User "created" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function created(Account $account)
+    public function created(Contact $contact)
     {
         $properties = [
             'type' => $this->type,
             'action' => 'created',
-            'done' => $account->toArray()
+            'done' => $contact->toArray()
         ];
 
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('created')
             ->withProperties($properties)
@@ -36,20 +36,20 @@ class AccountObserver
     /**
      * Handle the User "created" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function updating(Account $account)
+    public function updating(Contact $contact)
     {
         $properties = [
             'type' => $this->type,
             'action' => 'updating',
-            'before' => $account->getRawOriginal(),
-            'after' => $account->toArray()
+            'before' => $contact->getRawOriginal(),
+            'after' => $contact->toArray()
         ];
 
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('updating')
             ->withProperties($properties)
@@ -59,19 +59,19 @@ class AccountObserver
     /**
      * Handle the User "updated" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function updated(Account $account)
+    public function updated(Contact $contact)
     {
         $properties = [
             'type' => $this->type,
             'action' => 'updated',
-            'done' => $account->toArray()
+            'done' => $contact->toArray()
         ];
 
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('updated')
             ->withProperties($properties)
@@ -81,13 +81,13 @@ class AccountObserver
     /**
      * Handle the User "deleted" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function deleted(Account $account)
+    public function deleted(Contact $contact)
     {
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('deleted')
             ->log(EVENT_DELETED);
@@ -96,13 +96,13 @@ class AccountObserver
     /**
      * Handle the User "restored" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function restored(Account $account)
+    public function restored(Contact $contact)
     {
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('restored')
             ->log(EVENT_RESTORED);
@@ -111,13 +111,13 @@ class AccountObserver
     /**
      * Handle the User "forceDeleted" event.
      *
-     * @param Account $account
+     * @param Contact $contact
      * @return void
      */
-    public function forceDeleted(Account $account)
+    public function forceDeleted(Contact $contact)
     {
         activity($this->type)
-            ->performedOn($account)
+            ->performedOn($contact)
             ->by(auth()->user())
             ->event('forceDeleted')
             ->log(EVENT_FORCE_DELETED);
