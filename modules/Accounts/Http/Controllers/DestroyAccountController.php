@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Contacts\Http\Controllers;
+namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
-use Modules\Contacts\Data\Models\Contact;
+use Modules\Accounts\Data\Models\Account;
 
-class DestroyContactController extends Controller
+class DestroyAccountController extends Controller
 {
     /**
      * @param int $id
@@ -14,8 +14,8 @@ class DestroyContactController extends Controller
      */
     public function handle(int $id): JsonResponse
     {
-        $contact = Contact::findOrFail($id);
-        $contact->delete();
+        $account = Account::findOrFail($id);
+        $account->delete();
 
         return response()->json([]);
     }
