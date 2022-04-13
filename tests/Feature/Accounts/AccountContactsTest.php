@@ -10,7 +10,7 @@ use Modules\Contacts\Data\Models\Contact;
 use Tests\Feature\OAuth;
 use Tests\TestCase;
 
-class ContactsTest extends TestCase
+class AccountContactsTest extends TestCase
 {
     use RefreshDatabase;
     use OAuth;

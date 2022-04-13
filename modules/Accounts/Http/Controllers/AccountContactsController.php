@@ -8,7 +8,7 @@ use Modules\Accounts\Data\Repositories\AccountContactsRepository;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
 use Modules\Contacts\Http\Resources\ContactCollection;
 
-class ContactsController extends Controller
+class AccountContactsController extends Controller
 {
     /**
      * @param Request $request
