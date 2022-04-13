@@ -2,6 +2,7 @@
 
 namespace Modules\Accounts\Data\Observers;
 
+use Illuminate\Support\Facades\Cache;
 use Modules\Accounts\Data\Models\Account;
 
 class AccountObserver
@@ -10,6 +11,23 @@ class AccountObserver
      * @var string
      */
     private string $type = 'Accounts';
+
+    /**
+     * @var string[]
+     */
+    private array $cacheKey = ['accounts'];
+
+    /**
+     * Clear all cache Account
+     *
+     * @return void
+     */
+    private function cacheForgetAll()
+    {
+        foreach ($this->cacheKey as $key) {
+            Cache::forget($key);
+        }
+    }
 
     /**
      * Handle the User "created" event.
@@ -31,6 +49,8 @@ class AccountObserver
             ->event('created')
             ->withProperties($properties)
             ->log(EVENT_CREATED);
+
+        $this->cacheForgetAll();
     }
 
     /**
@@ -54,6 +74,8 @@ class AccountObserver
             ->event('updating')
             ->withProperties($properties)
             ->log(EVENT_UPDATING);
+
+        $this->cacheForgetAll();
     }
 
     /**
@@ -76,6 +98,8 @@ class AccountObserver
             ->event('updated')
             ->withProperties($properties)
             ->log(EVENT_UPDATED);
+
+        $this->cacheForgetAll();
     }
 
     /**
@@ -91,6 +115,8 @@ class AccountObserver
             ->by(auth()->user())
             ->event('deleted')
             ->log(EVENT_DELETED);
+
+        $this->cacheForgetAll();
     }
 
     /**
@@ -106,6 +132,8 @@ class AccountObserver
             ->by(auth()->user())
             ->event('restored')
             ->log(EVENT_RESTORED);
+
+        $this->cacheForgetAll();
     }
 
     /**
@@ -121,5 +149,7 @@ class AccountObserver
             ->by(auth()->user())
             ->event('forceDeleted')
             ->log(EVENT_FORCE_DELETED);
+
+        $this->cacheForgetAll();
     }
 }

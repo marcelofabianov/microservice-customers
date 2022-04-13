@@ -3,7 +3,7 @@
 namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Modules\Accounts\Data\Models\Account;
+use Modules\Accounts\Data\Cache\AccountCache;
 use Modules\Accounts\Http\Resources\AccountResource;
 
 class FindAccountController extends Controller
@@ -14,6 +14,9 @@ class FindAccountController extends Controller
      */
     public function handle(int $id): AccountResource
     {
-        return new AccountResource(Account::findOrFail($id));
+        $cache = new AccountCache();
+        $account = $cache->account($id);
+
+        return new AccountResource($account);
     }
 }
