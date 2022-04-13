@@ -9,11 +9,13 @@ use Modules\Accounts\Data\Factories\AccountFactory;
 use Modules\Accounts\Data\Scopes\AccountStatusScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Contacts\Data\Models\Contact;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Account extends Model
 {
     use AccountStatusScope;
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'document',

@@ -9,11 +9,13 @@ use Modules\Accounts\Data\Models\Account;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
 use Modules\Contacts\Data\Factories\ContactFactory;
 use Modules\Contacts\Data\Scopes\ContactTypeScope;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends Model
 {
     use HasFactory;
     use ContactTypeScope;
+    use SoftDeletes;
 
     protected $fillable = [
         'account_id',

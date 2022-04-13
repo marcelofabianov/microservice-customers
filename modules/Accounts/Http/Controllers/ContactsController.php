@@ -3,19 +3,19 @@
 namespace Modules\Accounts\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Accounts\Data\Repositories\AccountContactsRepository;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
+use Modules\Contacts\Http\Resources\ContactCollection;
 
 class ContactsController extends Controller
 {
     /**
      * @param Request $request
      * @param int $idAccount
-     * @return JsonResponse
+     * @return ContactCollection
      */
-    public function handle(Request $request, int $idAccount): JsonResponse
+    public function handle(Request $request, int $idAccount): ContactCollection
     {
         $repository = new AccountContactsRepository();
 
@@ -24,6 +24,6 @@ class ContactsController extends Controller
 
         $perPage = $request->get('per_page', env('SIMPLE_PAGINATE_PER_PAGE'));
 
-        return response()->json($contacts->simplePaginate($perPage));
+        return new ContactCollection($contacts->simplePaginate($perPage));
     }
 }
