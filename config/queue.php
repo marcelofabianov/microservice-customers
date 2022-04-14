@@ -79,10 +79,10 @@ return [
 
             'hosts' => [
                 [
-                    'host' => env('RABBITMQ_HOST', '127.0.0.1'),
+                    'host' => env('RABBITMQ_HOST', 'microservice_account_queue'),
                     'port' => env('RABBITMQ_PORT', 5672),
-                    'user' => env('RABBITMQ_USER', 'guest'),
-                    'password' => env('RABBITMQ_PASSWORD', 'guest'),
+                    'user' => env('RABBITMQ_USER', 'user'),
+                    'password' => env('RABBITMQ_PASSWORD', 'password'),
                     'vhost' => env('RABBITMQ_VHOST', '/'),
                 ],
             ],
