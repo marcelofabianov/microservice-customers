@@ -74,8 +74,6 @@ class AccountObserver
             ->event('updating')
             ->withProperties($properties)
             ->log(EVENT_UPDATING);
-
-        $this->cacheForgetAll();
     }
 
     /**
