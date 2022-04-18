@@ -5,6 +5,7 @@ namespace Modules\Accounts\Data\Observers;
 use App\Messages\EventEnum;
 use Modules\Accounts\Data\Cache\AccountCache;
 use Modules\Accounts\Data\Models\Account;
+use Modules\Accounts\Data\Queue\AccountQueue;
 
 class AccountObserver
 {
@@ -12,6 +13,27 @@ class AccountObserver
      * @var string
      */
     private string $type = 'Accounts';
+
+    /**
+     * @var string
+     */
+    private string $connection = 'rabbitmq';
+
+    /**
+     * @var string
+     */
+    private string $queue = 'Accounts';
+
+    /**
+     * @param array $properties
+     * @return void
+     */
+    private function dispatch(array $properties)
+    {
+        AccountQueue::dispatch(json_encode($properties))
+            ->onConnection($this->connection)
+            ->onQueue($this->queue);
+    }
 
     /**
      * Handle the User "created" event.
@@ -38,6 +60,8 @@ class AccountObserver
 
         $cache = new AccountCache();
         $cache->recycle($account, 'created');
+
+        $this->dispatch($properties);
     }
 
     /**
@@ -90,6 +114,8 @@ class AccountObserver
 
         $cache = new AccountCache();
         $cache->recycle($account, 'updated');
+
+        $this->dispatch($properties);
     }
 
     /**
@@ -100,6 +126,12 @@ class AccountObserver
      */
     public function deleted(Account $account)
     {
+        $properties = [
+            'type' => $this->type,
+            'action' => 'deleted',
+            'done' => $account->toArray()
+        ];
+
         $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
@@ -110,6 +142,8 @@ class AccountObserver
 
         $cache = new AccountCache();
         $cache->recycle($account, 'deleted');
+
+        $this->dispatch($properties);
     }
 
     /**
@@ -120,6 +154,12 @@ class AccountObserver
      */
     public function restored(Account $account)
     {
+        $properties = [
+            'type' => $this->type,
+            'action' => 'deleted',
+            'done' => $account->toArray()
+        ];
+
         $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
@@ -130,6 +170,8 @@ class AccountObserver
 
         $cache = new AccountCache();
         $cache->recycle($account, 'restored');
+
+        $this->dispatch($properties);
     }
 
     /**
@@ -140,6 +182,12 @@ class AccountObserver
      */
     public function forceDeleted(Account $account)
     {
+        $properties = [
+            'type' => $this->type,
+            'action' => 'deleted',
+            'done' => $account->toArray()
+        ];
+
         $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
@@ -150,5 +198,7 @@ class AccountObserver
 
         $cache = new AccountCache();
         $cache->recycle($account, 'forceDeleted');
+
+        $this->dispatch($properties);
     }
 }
