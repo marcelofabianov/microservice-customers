@@ -2,7 +2,7 @@
 
 namespace Modules\Accounts\Data\Observers;
 
-use Illuminate\Support\Facades\Cache;
+use Modules\Accounts\Data\Cache\AccountCache;
 use Modules\Accounts\Data\Models\Account;
 
 class AccountObserver
@@ -11,23 +11,6 @@ class AccountObserver
      * @var string
      */
     private string $type = 'Accounts';
-
-    /**
-     * @var string[]
-     */
-    private array $cacheKey = ['accounts'];
-
-    /**
-     * Clear all cache Account
-     *
-     * @return void
-     */
-    private function cacheForgetAll()
-    {
-        foreach ($this->cacheKey as $key) {
-            Cache::forget($key);
-        }
-    }
 
     /**
      * Handle the User "created" event.
@@ -43,14 +26,17 @@ class AccountObserver
             'done' => $account->toArray()
         ];
 
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('created')
             ->withProperties($properties)
             ->log(EVENT_CREATED);
 
-        $this->cacheForgetAll();
+        $cache = new AccountCache();
+        $cache->recycleCache($account, 'created');
     }
 
     /**
@@ -68,9 +54,11 @@ class AccountObserver
             'after' => $account->toArray()
         ];
 
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('updating')
             ->withProperties($properties)
             ->log(EVENT_UPDATING);
@@ -90,14 +78,17 @@ class AccountObserver
             'done' => $account->toArray()
         ];
 
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('updated')
             ->withProperties($properties)
             ->log(EVENT_UPDATED);
 
-        $this->cacheForgetAll();
+        $cache = new AccountCache();
+        $cache->recycleCache($account, 'updated');
     }
 
     /**
@@ -108,13 +99,16 @@ class AccountObserver
      */
     public function deleted(Account $account)
     {
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('deleted')
             ->log(EVENT_DELETED);
 
-        $this->cacheForgetAll();
+        $cache = new AccountCache();
+        $cache->recycleCache($account, 'deleted');
     }
 
     /**
@@ -125,13 +119,16 @@ class AccountObserver
      */
     public function restored(Account $account)
     {
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('restored')
             ->log(EVENT_RESTORED);
 
-        $this->cacheForgetAll();
+        $cache = new AccountCache();
+        $cache->recycleCache($account, 'restored');
     }
 
     /**
@@ -142,12 +139,15 @@ class AccountObserver
      */
     public function forceDeleted(Account $account)
     {
+        $author = auth()->user() ?? 0;
+
         activity($this->type)
             ->performedOn($account)
-            ->by(auth()->user())
+            ->by($author)
             ->event('forceDeleted')
             ->log(EVENT_FORCE_DELETED);
 
-        $this->cacheForgetAll();
+        $cache = new AccountCache();
+        $cache->recycleCache($account, 'forceDeleted');
     }
 }

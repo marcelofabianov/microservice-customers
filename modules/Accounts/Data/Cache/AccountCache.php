@@ -12,6 +12,11 @@ use Illuminate\Pagination\Paginator;
 class AccountCache
 {
     /**
+     * @var array
+     */
+    private array $keys = [];
+
+    /**
      * @param Request $request
      * @return Paginator
      */
@@ -44,5 +49,26 @@ class AccountCache
         }
 
         return Cache::get('account');
+    }
+
+    /**
+     * @param Account $account
+     * @param string $action
+     * @return void
+     */
+    public function recycleCache(Account $account, string $action): void
+    {
+//        $cacheAccounts = Cache::get('accounts');
+//        $cacheAccount = Cache::get('account');
+//
+//        if (in_array($action ['updated', 'restored', 'created'])) {
+//            dd('aki');
+//        }
+//        if (in_array($action ['deleted', 'forceDeleted'])) {
+//        dd('aki');
+//        }
+//        if ($account === $cacheAccount) {
+//            dd('aki');
+//        }
     }
 }
