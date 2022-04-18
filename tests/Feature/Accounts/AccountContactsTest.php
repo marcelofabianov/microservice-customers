@@ -17,6 +17,7 @@ class AccountContactsTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function listing_account_contacts()
     {
@@ -59,6 +60,7 @@ class AccountContactsTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function account_contact_list_passing_link_parameter()
     {

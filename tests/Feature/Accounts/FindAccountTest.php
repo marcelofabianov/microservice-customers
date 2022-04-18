@@ -17,6 +17,7 @@ class FindAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function find_account()
     {
@@ -44,6 +45,7 @@ class FindAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function find_account_passing_contact_relationship_parameter()
     {
@@ -78,6 +80,7 @@ class FindAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function find_account_passing_links_parameter()
     {

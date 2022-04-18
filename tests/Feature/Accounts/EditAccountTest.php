@@ -17,6 +17,7 @@ class EditAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function editing_account_registration_and_not_reporting_status()
     {
@@ -53,6 +54,7 @@ class EditAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function editing_account_registration_and_reporting_status()
     {

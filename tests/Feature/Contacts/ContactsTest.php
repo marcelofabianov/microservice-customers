@@ -17,6 +17,7 @@ class ContactsTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function list_of_contacts()
     {
@@ -58,6 +59,7 @@ class ContactsTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function contact_list_informed_type_parameter()
     {
@@ -99,6 +101,7 @@ class ContactsTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function contact_list_informed_links_parameter()
     {
@@ -143,6 +146,7 @@ class ContactsTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function contact_list_informed_relationships_parameter()
     {

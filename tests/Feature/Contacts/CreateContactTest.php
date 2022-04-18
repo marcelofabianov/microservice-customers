@@ -17,6 +17,7 @@ class CreateContactTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function creating_new_contact()
     {

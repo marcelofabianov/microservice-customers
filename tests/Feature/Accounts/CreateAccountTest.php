@@ -15,6 +15,7 @@ class CreateAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function creating_new_account_and_not_reporting_status()
     {
@@ -49,6 +50,7 @@ class CreateAccountTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function creating_new_account_and_reporting_status()
     {

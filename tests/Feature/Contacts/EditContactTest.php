@@ -18,6 +18,7 @@ class EditContactTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function edit_contact()
     {

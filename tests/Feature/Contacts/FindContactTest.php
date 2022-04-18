@@ -17,6 +17,7 @@ class FindContactTest extends TestCase
 
     /**
      * @test
+     * @group contacts
      */
     public function find_contact()
     {
