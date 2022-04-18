@@ -45,9 +45,9 @@ abstract class BaseCache
      */
     public function recycle(ModelContract $model, string $event)
     {
-        $cacheCollection = Cache::get($this->keyCollection);
-
         if (Cache::has($this->keyCollection)) {
+            $cacheCollection = Cache::get($this->keyCollection);
+
             if ($event == 'created') {
                 $this->created($cacheCollection, $model);
             }
