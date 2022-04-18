@@ -3,6 +3,7 @@
 namespace Modules\Accounts\Data\Observers;
 
 use App\Messages\EventEnum;
+use Modules\Accounts\Data\Cache\AccountCache;
 use Modules\Accounts\Data\Models\Account;
 
 class AccountObserver
@@ -35,8 +36,8 @@ class AccountObserver
             ->withProperties($properties)
             ->log(EventEnum::EVENT_CREATED->value);
 
-        //$cache = new AccountCache();
-        //$cache->recycleCache($account, 'created');
+        $cache = new AccountCache();
+        $cache->recycle($account, 'created');
     }
 
     /**
@@ -87,8 +88,8 @@ class AccountObserver
             ->withProperties($properties)
             ->log(EventEnum::EVENT_UPDATED->value);
 
-        //$cache = new AccountCache();
-        //$cache->recycleCache($account, 'updated');
+        $cache = new AccountCache();
+        $cache->recycle($account, 'updated');
     }
 
     /**
@@ -107,8 +108,8 @@ class AccountObserver
             ->event('deleted')
             ->log(EventEnum::EVENT_DELETED->value);
 
-        //$cache = new AccountCache();
-        //$cache->recycleCache($account, 'deleted');
+        $cache = new AccountCache();
+        $cache->recycle($account, 'deleted');
     }
 
     /**
@@ -127,8 +128,8 @@ class AccountObserver
             ->event('restored')
             ->log(EventEnum::EVENT_RESTORED->value);
 
-        //$cache = new AccountCache();
-        //$cache->recycleCache($account, 'restored');
+        $cache = new AccountCache();
+        $cache->recycle($account, 'restored');
     }
 
     /**
@@ -147,7 +148,7 @@ class AccountObserver
             ->event('forceDeleted')
             ->log(EventEnum::EVENT_FORCE_DELETED->value);
 
-        //$cache = new AccountCache();
-        //$cache->recycleCache($account, 'forceDeleted');
+        $cache = new AccountCache();
+        $cache->recycle($account, 'forceDeleted');
     }
 }

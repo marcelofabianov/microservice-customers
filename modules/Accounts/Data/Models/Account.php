@@ -2,6 +2,7 @@
 
 namespace Modules\Accounts\Data\Models;
 
+use App\Models\ModelContract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Accounts\Data\Enums\AccountStatusEnum;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Contacts\Data\Models\Contact;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Account extends Model
+class Account extends Model implements ModelContract
 {
     use AccountStatusScope;
     use HasFactory;
