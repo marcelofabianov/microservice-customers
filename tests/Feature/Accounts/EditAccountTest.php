@@ -7,13 +7,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Accounts\Data\Models\Account;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class EditAccountTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -33,7 +31,7 @@ class EditAccountTest extends TestCase
             'complement' => $this->faker->sentence(5),
         ];
 
-        $actual = $this->putJson(env('API_URL').'/accounts/'.$account->id, $data, $this->getHeadersAuthorization());
+        $actual = $this->putJson(env('API_URL').'/accounts/'.$account->id, $data, $this->headersAuthorization);
 
         $expected = [
             'id' => $account->id,
@@ -70,7 +68,7 @@ class EditAccountTest extends TestCase
             'status' => 5
         ];
 
-        $actual = $this->putJson(env('API_URL').'/accounts/'.$account->id, $data, $this->getHeadersAuthorization());
+        $actual = $this->putJson(env('API_URL').'/accounts/'.$account->id, $data, $this->headersAuthorization);
 
         $expected = [
             'id' => $account->id,

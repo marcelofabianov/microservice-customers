@@ -7,24 +7,23 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Accounts\Data\Models\Account;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class AccountsTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
     /**
      * @test
+     * @group accounts
      */
     public function list_of_accounts()
     {
         $account =  Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -63,12 +62,13 @@ class AccountsTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function list_of_accounts_that_contain_status_parameter()
     {
         $account =  Account::factory()->create(['status' => 2]);
 
-        $actual = $this->get(env('API_URL').'/accounts?status=2', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts?status=2', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -107,12 +107,13 @@ class AccountsTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function list_of_accounts_that_contain_links_parameter()
     {
         $account =  Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts?links=true', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts?links=true', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -154,12 +155,13 @@ class AccountsTest extends TestCase
 
     /**
      * @test
+     * @group accounts
      */
     public function list_of_accounts_that_contain_relationship_parameter()
     {
         $account =  Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts?relationships[]=contacts', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts?relationships[]=contacts', $this->headersAuthorization);
 
         $expected = [
             'data' => [

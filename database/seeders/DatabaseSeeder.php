@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Laravel\Passport\ClientRepository;
 use Modules\Contacts\Data\Models\Contact;
 
 class DatabaseSeeder extends Seeder
@@ -11,12 +13,27 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      *
-     * @return void
+     *
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create();
+        Artisan::call('passport:install');
 
-        Contact::factory(1000)->create();
+        $user = User::factory()->create([
+            'email' => 'user@test.com'
+        ]);
+
+        $client = new ClientRepository();
+        $client = $client->create($user->id, $user->name, '', null, true, true, true);
+
+        //Contact::factory(1000)->create();
+
+        dd([
+            'grant_type' => 'password',
+            'client_id' => $client->id,
+            'client_secret' => $client->secret,
+            'username' => $user->email,
+            'password' => $user->password
+        ]);
     }
 }

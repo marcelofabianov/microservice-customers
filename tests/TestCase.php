@@ -2,11 +2,7 @@
 
 namespace Tests;
 
-use App\Models\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
-use Tests\Feature\MockOAuth;
 use Tests\Feature\OAuth;
 
 abstract class TestCase extends BaseTestCase
@@ -14,7 +10,10 @@ abstract class TestCase extends BaseTestCase
     use CreatesApplication;
     use OAuth;
 
-    protected $headersAuthorization;
+    /**
+     * @var array
+     */
+    protected array $headersAuthorization;
 
     public $mockConsoleOutput = false;
 
@@ -22,6 +21,6 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        //$this->setHeadersAutorization(); Return Invalid token =\
+        $this->setHeadersAutorization();
     }
 }

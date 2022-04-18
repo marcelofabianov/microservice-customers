@@ -14,7 +14,7 @@ trait OAuth
 
         $data = $this->dataSubmit();
 
-        $response = $this->postJson('/oauth/token', $data, ['Accept' => 'application/json']);
+        $response = $this->postJson(env('APP_URL').'/oauth/token', $data, ['Accept' => 'application/json']);
 
         $jsonResponse = $response->json();
 
@@ -29,14 +29,15 @@ trait OAuth
         $user = User::factory()->create();
 
         $client = new ClientRepository();
-        $client = $client->createPersonalAccessClient($user->id, $user->name, '');
+        $client = $client->create($user->id, $user->name, '', null, true, true, true);
 
         return [
             'grant_type' => 'password',
             'client_id' => $client->id,
             'client_secret' => $client->secret,
             'username' => $user->email,
-            'password' => $user->password
+            'password' => 'password',
+            'scope' => '*'
         ];
     }
 }

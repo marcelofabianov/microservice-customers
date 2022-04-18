@@ -8,13 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Contacts\Data\Enums\ContactTypeEnum;
 use Modules\Contacts\Data\Models\Contact;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class EditContactTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -34,7 +32,7 @@ class EditContactTest extends TestCase
             'type' => $type->value,
         ];
 
-        $actual = $this->putJson(env('API_URL').'/contacts/'.$contact->id, $data, $this->getHeadersAuthorization());
+        $actual = $this->putJson(env('API_URL').'/contacts/'.$contact->id, $data, $this->headersAuthorization);
 
         $expected = [
             'id' => $actual['id'], // actual

@@ -7,13 +7,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Accounts\Data\Models\Account;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class FindAccountTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -24,7 +22,7 @@ class FindAccountTest extends TestCase
     {
         $account = Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts/'.$account->id, $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts/'.$account->id, $this->headersAuthorization);
 
         $expected = [
             'id' => $account->id,
@@ -51,7 +49,7 @@ class FindAccountTest extends TestCase
     {
         $account = Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts/'.$account->id.'?relationships[]=contacts', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts/'.$account->id.'?relationships[]=contacts', $this->headersAuthorization);
 
         $expected = [
             'id' => $account->id,
@@ -85,7 +83,7 @@ class FindAccountTest extends TestCase
     {
         $account = Account::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/accounts/'.$account->id.'?links=true', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/accounts/'.$account->id.'?links=true', $this->headersAuthorization);
 
         $expected = [
             'id' => $account->id,

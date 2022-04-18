@@ -7,13 +7,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Contacts\Data\Models\Contact;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class FindContactTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -24,7 +22,7 @@ class FindContactTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/contacts/'.$contact->id, $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/contacts/'.$contact->id, $this->headersAuthorization);
 
         $expected = [
             'id' => $contact->id,

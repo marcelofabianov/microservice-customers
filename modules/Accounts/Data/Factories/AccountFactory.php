@@ -13,11 +13,11 @@ class AccountFactory extends Factory
     {
         return [
             'document' => (string) rand(111111111111111, 211111111111111),
-            'name' => $this->faker->company,
-            'address' => $this->faker->sentence,
-            'district' => $this->faker->sentence,
+            'name' => $this->faker->name,
+            'address' => $this->faker->sentence(5),
+            'district' => $this->faker->sentence(5),
             'city' => $this->faker->city,
-            'complement' => '',
+            'complement' => $this->faker->sentence(5),
             'status' => (string) rand(0, 7),
         ];
     }

@@ -2,7 +2,7 @@
 
 namespace Modules\Accounts\Data\Observers;
 
-use Modules\Accounts\Data\Cache\AccountCache;
+use App\Messages\EventEnum;
 use Modules\Accounts\Data\Models\Account;
 
 class AccountObserver
@@ -26,17 +26,17 @@ class AccountObserver
             'done' => $account->toArray()
         ];
 
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('created')
             ->withProperties($properties)
-            ->log(EVENT_CREATED);
+            ->log(EventEnum::EVENT_CREATED->value);
 
-        $cache = new AccountCache();
-        $cache->recycleCache($account, 'created');
+        //$cache = new AccountCache();
+        //$cache->recycleCache($account, 'created');
     }
 
     /**
@@ -54,14 +54,14 @@ class AccountObserver
             'after' => $account->toArray()
         ];
 
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('updating')
             ->withProperties($properties)
-            ->log(EVENT_UPDATING);
+            ->log(EventEnum::EVENT_UPDATING->value);
     }
 
     /**
@@ -78,17 +78,17 @@ class AccountObserver
             'done' => $account->toArray()
         ];
 
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('updated')
             ->withProperties($properties)
-            ->log(EVENT_UPDATED);
+            ->log(EventEnum::EVENT_UPDATED->value);
 
-        $cache = new AccountCache();
-        $cache->recycleCache($account, 'updated');
+        //$cache = new AccountCache();
+        //$cache->recycleCache($account, 'updated');
     }
 
     /**
@@ -99,16 +99,16 @@ class AccountObserver
      */
     public function deleted(Account $account)
     {
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('deleted')
-            ->log(EVENT_DELETED);
+            ->log(EventEnum::EVENT_DELETED->value);
 
-        $cache = new AccountCache();
-        $cache->recycleCache($account, 'deleted');
+        //$cache = new AccountCache();
+        //$cache->recycleCache($account, 'deleted');
     }
 
     /**
@@ -119,16 +119,16 @@ class AccountObserver
      */
     public function restored(Account $account)
     {
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('restored')
-            ->log(EVENT_RESTORED);
+            ->log(EventEnum::EVENT_RESTORED->value);
 
-        $cache = new AccountCache();
-        $cache->recycleCache($account, 'restored');
+        //$cache = new AccountCache();
+        //$cache->recycleCache($account, 'restored');
     }
 
     /**
@@ -139,15 +139,15 @@ class AccountObserver
      */
     public function forceDeleted(Account $account)
     {
-        $author = auth()->user() ?? 0;
+        $author = auth()->check() ? auth()->user() : null;
 
         activity($this->type)
             ->performedOn($account)
             ->by($author)
             ->event('forceDeleted')
-            ->log(EVENT_FORCE_DELETED);
+            ->log(EventEnum::EVENT_FORCE_DELETED->value);
 
-        $cache = new AccountCache();
-        $cache->recycleCache($account, 'forceDeleted');
+        //$cache = new AccountCache();
+        //$cache->recycleCache($account, 'forceDeleted');
     }
 }

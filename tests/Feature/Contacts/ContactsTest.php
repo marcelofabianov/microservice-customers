@@ -7,13 +7,11 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Modules\Contacts\Data\Models\Contact;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class ContactsTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -24,7 +22,7 @@ class ContactsTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/contacts', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/contacts', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -65,7 +63,7 @@ class ContactsTest extends TestCase
     {
         $contact = Contact::factory()->create(['type'=>3]);
 
-        $actual = $this->get(env('API_URL').'/contacts?type=3', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/contacts?type=3', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -106,7 +104,7 @@ class ContactsTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/contacts?links=true', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/contacts?links=true', $this->headersAuthorization);
 
         $expected = [
             'data' => [
@@ -150,7 +148,7 @@ class ContactsTest extends TestCase
     {
         $contact = Contact::factory()->create();
 
-        $actual = $this->get(env('API_URL').'/contacts?relationships[]=account', $this->getHeadersAuthorization());
+        $actual = $this->get(env('API_URL').'/contacts?relationships[]=account', $this->headersAuthorization);
 
         $expected = [
             'data' => [

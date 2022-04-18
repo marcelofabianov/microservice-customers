@@ -54,9 +54,8 @@ class AccountCache
     /**
      * @param Account $account
      * @param string $action
-     * @return void
      */
-    public function recycleCache(Account $account, string $action): void
+    public function recycleCache(Account $account, string $action)
     {
 //        $cacheAccounts = Cache::get('accounts');
 //        $cacheAccount = Cache::get('account');

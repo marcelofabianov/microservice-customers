@@ -2,6 +2,7 @@
 
 namespace Modules\Contacts\Data\Observers;
 
+use App\Messages\EventEnum;
 use Modules\Contacts\Data\Models\Contact;
 
 class ContactObserver
@@ -25,12 +26,14 @@ class ContactObserver
             'done' => $contact->toArray()
         ];
 
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('created')
             ->withProperties($properties)
-            ->log(EVENT_CREATED);
+            ->log(EventEnum::EVENT_CREATED->value);
     }
 
     /**
@@ -48,12 +51,14 @@ class ContactObserver
             'after' => $contact->toArray()
         ];
 
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('updating')
             ->withProperties($properties)
-            ->log(EVENT_UPDATING);
+            ->log(EventEnum::EVENT_UPDATING->value);
     }
 
     /**
@@ -70,12 +75,14 @@ class ContactObserver
             'done' => $contact->toArray()
         ];
 
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('updated')
             ->withProperties($properties)
-            ->log(EVENT_UPDATED);
+            ->log(EventEnum::EVENT_UPDATED->value);
     }
 
     /**
@@ -86,11 +93,13 @@ class ContactObserver
      */
     public function deleted(Contact $contact)
     {
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('deleted')
-            ->log(EVENT_DELETED);
+            ->log(EventEnum::EVENT_DELETED->value);
     }
 
     /**
@@ -101,11 +110,13 @@ class ContactObserver
      */
     public function restored(Contact $contact)
     {
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('restored')
-            ->log(EVENT_RESTORED);
+            ->log(EventEnum::EVENT_RESTORED->value);
     }
 
     /**
@@ -116,10 +127,12 @@ class ContactObserver
      */
     public function forceDeleted(Contact $contact)
     {
+        $author = auth()->check() ? auth()->user() : null;
+
         activity($this->type)
             ->performedOn($contact)
-            ->by(auth()->user())
+            ->by($author)
             ->event('forceDeleted')
-            ->log(EVENT_FORCE_DELETED);
+            ->log(EventEnum::EVENT_FORCE_DELETED->value);
     }
 }
