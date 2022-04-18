@@ -60,6 +60,10 @@ abstract class BaseCache
                 $this->deleted($cacheCollection, $model);
             }
         }
+
+        if (Cache::has($this->key)) {
+            Cache::forget($this->key);
+        }
     }
 
     /**
