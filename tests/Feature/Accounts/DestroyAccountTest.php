@@ -5,7 +5,7 @@ namespace Tests\Feature\Accounts;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Modules\Accounts\Data\Models\Account;
+use Microservice\Accounts\Data\Models\Account;
 use Tests\TestCase;
 
 class DestroyAccountTest extends TestCase

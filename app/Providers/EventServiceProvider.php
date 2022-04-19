@@ -6,10 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Modules\Accounts\Data\Models\Account;
-use Modules\Accounts\Data\Observers\AccountObserver;
-use Modules\Contacts\Data\Models\Contact;
-use Modules\Contacts\Data\Observers\ContactObserver;
+use Microservice\Accounts\Data\Models\Account;
+use Microservice\Accounts\Data\Observers\AccountObserver;
+use Microservice\Contacts\Data\Models\Contact;
+use Microservice\Contacts\Data\Observers\ContactObserver;
 
 class EventServiceProvider extends ServiceProvider
 {

@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::prefix('api/account-manager/v1')
                 ->as('api.')
                 ->middleware('api')
-                ->namespace('Modules')
+                ->namespace('Microservice')
                 ->group(base_path('routes/api.php'));
         });
     }

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Modules\Contacts\Data\Models\Contact;
+use Microservice\Contacts\Data\Models\Contact;
 use Tests\TestCase;
 
 class FindContactTest extends TestCase

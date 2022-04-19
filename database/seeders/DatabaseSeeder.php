@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
 use Laravel\Passport\ClientRepository;
-use Modules\Contacts\Data\Models\Contact;
+use Microservice\Contacts\Data\Models\Contact;
 
 class DatabaseSeeder extends Seeder
 {

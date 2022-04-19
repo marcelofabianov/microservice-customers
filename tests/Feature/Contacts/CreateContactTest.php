@@ -5,8 +5,8 @@ namespace Tests\Feature\Contacts;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Modules\Accounts\Data\Models\Account;
-use Modules\Contacts\Data\Enums\ContactTypeEnum;
+use Microservice\Accounts\Data\Models\Account;
+use Microservice\Contacts\Data\Enums\ContactTypeEnum;
 use Tests\TestCase;
 
 class CreateContactTest extends TestCase
