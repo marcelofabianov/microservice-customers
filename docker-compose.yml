@@ -1,0 +1,107 @@
+version: '3'
+
+services:
+
+    http:
+        container_name: noufiscal_microservice_account_http
+        image: nginx:latest
+        restart: always
+        ports:
+            - "8088:80"
+            - "433:443"
+        volumes:
+            - ./public:/var/www/html/public
+            - ./.docker/dev/noufiscal_microservice_account_http/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ./.docker/dev/noufiscal_microservice_account_http/nginx/log:/var/log/nginx
+        networks:
+            - noufiscal_microservice_account_network
+
+    php:
+        container_name: noufiscal_microservice_account_php
+        image: marcelofabianov/php-8.1-fpm-pgsql
+        restart: always
+        working_dir: /var/www/html
+        volumes:
+            - .:/var/www/html
+        ports:
+            - "9043:9000"
+        networks:
+            - noufiscal_microservice_account_network
+
+    db:
+        container_name: noufiscal_microservice_account_db
+        image: postgres:13
+        environment:
+            PGPASSWORD: '${DB_PASSWORD:-password}'
+            POSTGRES_DB: '${DB_DATABASE:-noufiscal_microservice_account_db}'
+            POSTGRES_USER: '${DB_USERNAME:-user}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-password}'
+        volumes:
+            - 'noufiscal_microservice_account_db:/var/lib/postgresql/data'
+        ports:
+            - "5421:5432"
+        networks:
+            - noufiscal_microservice_account_network
+
+    db_testing:
+        container_name: noufiscal_microservice_account_db_testing
+        image: postgres:13
+        environment:
+            PGPASSWORD: '${TEST_DB_PASSWORD:-password}'
+            POSTGRES_DB: '${TEST_DB_DATABASE:-noufiscal_microservice_account_db_testing}'
+            POSTGRES_USER: '${TEST_DB_USERNAME:-user}'
+            POSTGRES_PASSWORD: '${TEST_DB_PASSWORD:-password}'
+        volumes:
+            - 'noufiscal_microservice_account_db_testing:/var/lib/postgresql/data'
+        ports:
+            - "5411:5432"
+        networks:
+            - noufiscal_microservice_account_network
+
+    cache:
+        container_name: noufiscal_microservice_account_cache
+        image: redis:latest
+        command: redis-server --appendonly yes
+        restart: always
+        volumes:
+            - ./.docker/dev/noufiscal_microservice_account_cache/redis/redis.conf:/usr/local/etc/redis/redis.conf
+            - 'noufiscal_microservice_account_cache:/data'
+        ports:
+            - "6387:6379"
+        networks:
+            - noufiscal_microservice_account_network
+
+    queue:
+        container_name: noufiscal_microservice_account_queue
+        image: docker.io/bitnami/rabbitmq:3.9
+        restart: always
+        ports:
+            - '4369:4369'
+            - '5551:5551'
+            - '5552:5552'
+            - '5672:5672'
+            - '25672:25672'
+            - '15672:15672'
+        environment:
+            RABBITMQ_SECURE_PASSWORD: '${RABBITMQ_SECURE_PASSWORD:-yes}'
+            RABBITMQ_ERLANG_COOKIE: '${RABBITMQ_ERLANG_COOKIE:-queue_cookie}'
+            RABBITMQ_DEFAULT_USER: '${RABBITMQ_DEFAULT_USER:-user}'
+            RABBITMQ_DEFAULT_PASS: '${RABBITMQ_DEFAULT_PASS:-password}'
+        volumes:
+            - 'noufiscal_microservice_account_queue:/bitnami/rabbitmq/mnesia'
+        networks:
+            - noufiscal_microservice_account_network
+
+networks:
+    noufiscal_microservice_account_network:
+        driver: bridge
+
+volumes:
+    noufiscal_microservice_account_cache:
+        driver: local
+    noufiscal_microservice_account_db:
+        driver: local
+    noufiscal_microservice_account_db_testing:
+        driver: local
+    noufiscal_microservice_account_queue:
+        driver: local
