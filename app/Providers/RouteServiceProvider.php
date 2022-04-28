@@ -36,7 +36,7 @@ class RouteServiceProvider extends ServiceProvider
 
             // Core
             Route::middleware(['api', 'auth:api'])
-                ->prefix('api/ms_account/v1')
+                ->prefix('ms_customers/api/v1')
                 ->as('api.')
                 ->namespace('Microservice')
                 ->group(base_path('core/routes.php'));

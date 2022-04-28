@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CustomerPipeline extends Model
 {
-    use HasFactory;
-    use SoftDeletes;
+    use HasFactory,
+        SoftDeletes;
 
     protected $fillable = [
         'label',
-        'value'
+        'name',
     ];
-
-    protected static function newFactory(): CustomerPipeline
-    {
-        return new CustomerPipeline();
-    }
 }
